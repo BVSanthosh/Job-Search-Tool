@@ -1,18 +1,17 @@
-import express from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import searchRoutes from "./routes/search.route";
 
 dotenv.config();
-const app = express();
+const app : Application = express();
 
-const port = process.env.PORT;
+const port : string | undefined = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/api/hello", (req, res) => {
-    res.json({ message: "Hello from the backend" });
-});
+app.use("/api", searchRoutes);
 
 app.listen(port, () => {
     console.log(`Server listening on port: ${port}`);
