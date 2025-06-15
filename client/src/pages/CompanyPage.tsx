@@ -1,5 +1,6 @@
+import type { FC } from 'react';
 import Insights from "../components/Insights";
-const Company = () => {
+const Company: FC = () => {
   return (
     <div className="flex flex-col justify-center items-center">
         <h1 className="font-primary text-company font-semibold text-secondary">Company1</h1>
