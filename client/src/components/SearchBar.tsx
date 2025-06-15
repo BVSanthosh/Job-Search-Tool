@@ -1,6 +1,14 @@
 import { Search } from 'lucide-react';
 
-const SearchBar = () => {
+interface SearchBarProps {
+  search: string;
+  setSearch: (value: string) => void;
+  handleSearch: () => void;
+  
+}
+
+const SearchBar = ({ search, setSearch, handleSearch}: SearchBarProps) => {
+
   return (
     <div className="flex">
       <div className="relative w-full text-white">
@@ -9,8 +17,10 @@ const SearchBar = () => {
           type="text" 
           className="w-full input rounded-full bg-secondary p-4 pl-12"
           placeholder="Search for a company..."  
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <button className="absolute right-4 top-3 rounded-full px-3 py-1">Submit</button>
+        <button className="absolute right-4 top-3 rounded-full px-3 py-1" onClick={handleSearch}>Submit</button>
       </div>
     </div>
   )
