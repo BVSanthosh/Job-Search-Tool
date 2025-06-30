@@ -4,7 +4,6 @@ interface SearchBarProps {
   search: string;
   setSearch: (value: string) => void;
   handleSearch: () => void;
-  
 }
 
 const SearchBar = ({ search, setSearch, handleSearch}: SearchBarProps) => {
