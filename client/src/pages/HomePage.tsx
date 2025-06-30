@@ -1,19 +1,15 @@
 import { useState } from 'react';
-import type { FC } from 'react';
-import { useCompanyStore } from '../store/companyStore';
-import { useFetchCompany } from '../hooks/useFetchCompany';
+import { useFetchSuggestions } from '../hooks/useFetchSuggestions';
 import SearchBar from '../components/SearchBar';
 import Results from '../components/Results';
 
-const Home: FC= () => {
+const Home = () => {
   const [search, setSearch] = useState('');
-  const setCompany = useCompanyStore((state) => state.setCompany);
-  const { refetch, isFetching, isError, data } = useFetchCompany(search);
+  const { refetch, isFetching, isError, data } = useFetchSuggestions(search);
 
   const handleSearch = async() => {
     if (!search.trim()) return;
-    const { data } = await refetch();
-    if (data) setCompany(data);
+    await refetch();
   }
 
   return (
@@ -23,8 +19,9 @@ const Home: FC= () => {
       <div className="mt-10 w-md">
         <SearchBar search={search} setSearch={setSearch} handleSearch={handleSearch}/>
         {isFetching && <p>Searching...</p>}
-        {isError && <p>No Results Found.</p>}
-        {data && <Results/>}
+        {isError && <p>Error loading results.</p>}
+        {data && data.length === 0 && <p>No Results Found.</p>}
+        {data && data.length > 0 && <Results suggestions={data} />}
       </div>
     </div>
   )

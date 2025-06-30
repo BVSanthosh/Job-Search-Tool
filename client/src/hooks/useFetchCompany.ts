@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { client } from '../lib/axios';
-import type { Company } from '../types/company.types';
+import { axiosClient } from '../lib/axios';
+import type { CompanyAPIResponse } from '../types/company.types';
 
-const fetchCompanyData = async (companyName : string): Promise<Company> => {
-    const { data } = await client.get<Company>(`/${companyName}`);
+const fetchCompanyData = async (companyName : string): Promise<CompanyAPIResponse> => {
+    const { data } = await axiosClient.get<CompanyAPIResponse>(`/${companyName}`);
     return data;
 }
 
